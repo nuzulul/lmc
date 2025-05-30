@@ -207,7 +207,7 @@ tr:nth-child(even) {
 <script>
 
 //pengaturan
-const namadokumen = "PENGMAS FK UNAIR - PELATIHAN dan SKRINING PENDENGARAN ANAK SEKOLAH DI PONDOK GONTOR PONOROGO 7 AGUSTUS 2024"
+const namadokumen = "SEKOLAH KEPEMIMPINAN LMC"
 const seminarcsv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrCQcCFcDjvuTE26G7NlYrmyFFHdxbvkhCHzlbSWSEoFjXvSmRzkBR_rwM5S88rnwCVknye4c1AGgm/pub?output=csv'
 
 function CSVToArray( strData, strDelimiter ){
@@ -268,10 +268,10 @@ $.get("https://script.google.com/macros/s/AKfycbz6Fit6-D_2PABn3zrpzydiGb9PogiqqB
     data = CSVToArray(data.contents);
     //console.log(data);
     data.forEach((arr,index)=>{
-            let nomor = arr[12];
+            let nomor = arr[9];
             let nama = arr[1];
             let sertifikat = arr[9];
-            let sebagai = arr[3];
+            let sebagai = 'PESERTA';
             let download = arr[12];
 			
             if (( index !== 0) && ( nama !== ''))
@@ -349,13 +349,15 @@ function pencarian()
 
 function runpencarian(sertifikat,nomor)
 {
+  console.log(sertifikat,nomor)
   sertifikat.forEach((item)=>{
     if(item.nomor === nomor)
     {
       let data = "<h1>DATA QR CODE SERTIFIKAT</h1>"+
                  "<p>NAMA : "+item.nama+"</p>"+
                  "<p>SERTIFIKAT : "+item.sertifikat+" "+namadokumen+"</p>"+
-                 "<p>SEBAGAI : "+item.sebagai+"</p>";
+                 "<p>SEBAGAI : "+item.sebagai+"</p>"+
+				 "<a href='"+item.download+"' target='_blank'>Download</a>";
       showinfo(data);
     }
   })
